@@ -31,7 +31,12 @@ class Users extends Component {
   render () {
     console.log(usersData);
     const userList = usersData.filter((user) => user.id < 10)
-    const ignoreColumns = ['lastname','id'];
+    
+    function userModifier(user) {
+      user.name = user.name + " " + user.lastname;
+      return user;
+    }
+
     return (
         <div className="animated fadeIn">
         <Row>
@@ -41,7 +46,7 @@ class Users extends Component {
                 <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
               </CardHeader>
               <CardBody>
-                <DinamicTable data={userList} ignoreColumns={['lastname','id']}/>
+                <DinamicTable data={userList} ignoreColumns={['lastname','id']} rowModifier={userModifier()}/>
               </CardBody>
             </Card>
           </Col>

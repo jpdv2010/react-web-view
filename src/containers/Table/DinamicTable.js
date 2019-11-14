@@ -6,15 +6,21 @@ class DinamicTable extends Component {
         const fixedData = this.props.data;
         const data = this.props.data;
         const ignoreColumns = this.props.ignoreColumns;
+        
         const RenderRow = (props) =>{
             
             return props.keys.map((key, index)=>{
                 if(indexToNotShow.indexOf(index) == -1){
+                    /*if(indexToModifyValue.indexOf(index) == -1){
+                        this.props.filters[index]
+                    }*/
+                    props.data[key] = props.data.rowModifier(props.data[key]);
                     return <td key={props.data[key]}>{props.data[key]}</td>
                 }
             })
         }
         var indexToNotShow = [];
+        var indexToModifyValue = [];
         return (
                 <Table responsive hover data={this.data} >
                     <thead>
