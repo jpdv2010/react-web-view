@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import Register from './view/user/Register';
+
 import './App.css';
 import './App.scss';
 
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+
+const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+          <React.Suspense fallback={loading()}>
+            <Switch>
+              <Route path="/register" component={Register}/>
+              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
+            </Switch>
+          </React.Suspense>
+      </HashRouter>
   );
 }
 

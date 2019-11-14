@@ -7,13 +7,7 @@ import Register from './view/user/Register';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-ReactDOM.render(<BrowserRouter>
-                    <Switch>
-                        <Route path="/" exact={true} component={App} />
-                        <Route path="/sobre" component={Sobre} />
-                        <Route path="/register" component={Register}/>
-                    </Switch>
-                </ BrowserRouter>
+ReactDOM.render(<App/>
                 , document.getElementById('root'));
 
 
