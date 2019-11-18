@@ -3,7 +3,6 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
 class DinamicTable extends Component {
     render () {
-        const fixedData = this.props.data;
         const data = this.props.data;
         const ignoreColumns = this.props.ignoreColumns;
         const customData = this.props.customData;
@@ -24,7 +23,6 @@ class DinamicTable extends Component {
         }
 
         var rideItems = [];
-        var indexToModifyValue = [];
         return (
             <Card>
                 <CardHeader>
@@ -35,7 +33,7 @@ class DinamicTable extends Component {
                         <thead>
                         <tr>
                             {
-                                Object.keys(data[0]).map((key, index) => {
+                                Object.keys(customData != null? customData(data[0]) : data[0]).map((key, index) => {
                                     if(ignoreColumns.indexOf(key) == -1){
                                         return <th key={key}>{key}</th>
                                     } else {

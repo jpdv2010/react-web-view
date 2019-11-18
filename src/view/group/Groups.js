@@ -5,7 +5,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import groupData from './GroupData';
 import DinamicTable from '../../containers/Table/DinamicTable';
 
-class Users extends Component {
+class Groups extends Component {
   
   customRender = (data, key) =>{
       if(data["members"] >= 20){
@@ -19,8 +19,8 @@ class Users extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
-            <DinamicTable data={groupList} ignoreColumns={['id']} customRender={this.customRender} title={"Groups"} smalTitle={"exaample"}/>
+          <Col xl={12}>
+            <DinamicTable data={groupList} ignoreColumns={['id']} customRender={this.customRender} title={"Groups"} smalTitle={"example"}/>
           </Col>
         </Row>
       </div>
@@ -28,4 +28,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default Groups;
