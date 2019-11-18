@@ -6,49 +6,42 @@ import usersData from './UsersData';
 import DinamicTable from '../../containers/Table/DinamicTable';
 
 function UserRow(props) {
-    const user = props.user;
-    const index = props.index;
-    const getGender = (gender) => {
-      return gender == "M"? "Male" : "Female"
-    }
+  const user = props.user;
+  const index = props.index;
   
-    return (
-      <tr key={user.id.toString()}>
-        <th scope="row">{user.name + " " + user.lastname}</th>
-        <td>{user.age}</td>
-        <td>{user.role}</td>
-        <td>{getGender(user.gender)}</td>
-      </tr>
-    )
+  const getGender = (gender) => {
+    return gender == "M"? "Male" : "Female"
   }
 
-  function Header(props){
-    const key = props.key;
-    return (<th scope="col">{key}</th>);
-  }
+  return (
+    <tr key={user.id.toString()}>
+      <th scope="row">{user.name + " " + user.lastname}</th>
+      <td>{user.age}</td>
+      <td>{user.role}</td>
+      <td>{getGender(user.gender)}</td>
+    </tr>
+  )
+}
 
 class Users extends Component {
-  render () {
-    console.log(usersData);
-    const userList = usersData.filter((user) => user.id < 10)
-    
-    function userModifier(user) {
-      user.name = user.name + " " + user.lastname;
-      return user;
-    }
 
+  constructor(props){
+    super(props);
+    this.userModifier = this.userModifier.bind(this);
+  }
+
+  userModifier = (user) => {
+    user.name = user.name + " " + user.lastname;
+    return user;
+  }
+
+  render () {
+    const userList = usersData.filter((user) => user.id < 10)
     return (
         <div className="animated fadeIn">
         <Row>
           <Col xl={6}>
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
-              </CardHeader>
-              <CardBody>
-                <DinamicTable data={userList} ignoreColumns={['lastname','id']} rowModifier={userModifier()}/>
-              </CardBody>
-            </Card>
+            <DinamicTable data={userList} ignoreColumns={['lastname','id']} rowModifier={this.userModifier} title={"Users"} smalTitle={"exaample"}/>
           </Col>
         </Row>
       </div>
