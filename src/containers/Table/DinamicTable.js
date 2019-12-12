@@ -1,20 +1,30 @@
 import React, { Component, Suspense } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
+var data = {};
+var ignoreColumns = [];
+var customData = {};
+var customRender = {};
+
 class DinamicTable extends Component {
+
+    componentWillMount(){
+        data = this.props.data;
+        ignoreColumns = this.props.ignoreColumns;
+        customData = this.props.customData;
+        customRender = 
+        this.props.customRender;
+    }
+
     render () {
-        const data = this.props.data;
-        const ignoreColumns = this.props.ignoreColumns;
-        const customData = this.props.customData;
-        const customRender = this.props.customRender;
-        
         const RenderRow = (props) =>{
             return props.keys.map((key, index)=>{
                 if(rideItems.indexOf(index) == -1){
-                    var row = {};
+                    var row = null;
                     if(customRender != null){
                         row = customRender(props.data, key);
-                    } else {
+                    } else if(row === null) {
+
                         row = <td key={props.data[key]}>{props.data[key]}</td>
                     }
                     return row;
@@ -23,6 +33,7 @@ class DinamicTable extends Component {
         }
 
         var rideItems = [];
+
         return (
             <Card>
                 <CardHeader>

@@ -20,8 +20,8 @@ class Users extends Component {
 
   userModifier = (user) => {
     user.fullname = user.name + " " + user.lastname;
-    user.teste = user.gender == "F" && user.age >= 25? "Sim" : "Não";
-    user.gender = user.gender == "F"? "Female" : "Male";
+    user.teste = (user.gender == "F" || user.gender == "Female") && user.age >= 25? "Sim" : "Não";
+    user.gender = user.gender == "F" || user.gender == "Female"? "Female" : "Male";
     return user;
   }
 
