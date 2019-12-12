@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
@@ -25,12 +26,19 @@ class Users extends Component {
     return user;
   }
 
+  customRender = (data, key) => {
+    if(key === 'fullname'){
+      return <td><Link to={'/users/' + data["id"]}>{data["fullname"]}</Link></td>
+    }
+    return <td key={data[key]}>{data[key]}</td>
+  }
+
   render () {
     return (
       <div className="animated fadeIn">
         <Row>
           <Col xl={12}>
-            <DinamicTable data={this.userList} ignoreColumns={['name','lastname','id']} customData={this.userModifier} title={"Users"} smalTitle={"example"}/>
+            <DinamicTable data={this.userList} ignoreColumns={['name','lastname','id']} customRender={this.customRender} customData={this.userModifier} title={"Users"} smalTitle={"example"}/>
           </Col>
         </Row>
       </div>
