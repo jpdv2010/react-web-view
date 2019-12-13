@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { FormGroup, CardHeader,FormFeedback, Label} from 'reactstrap';
+import UserRegister from './UserRegister'
 
 class Register extends Component {
     render(){
@@ -10,56 +11,7 @@ class Register extends Component {
                     <Row className="justify-content-center">
                         <Col md="9" lg="7" xl="6">
                             <Card className="mx-4">
-                                <CardBody className="p-4">
-                                <Form  className="was-validated">
-                                    <h1>Register</h1>
-                                    <p className="text-muted">Create your account</p>
-                                    
-                                    <InputGroup className="mb-3">
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                            <i className="icon-user"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input type="text" className="form-control-warning" id="inputWarning2i" placeholder="Username" autoComplete="username" required/>
-                                        <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                                        <FormFeedback valid className="help-block">Input provided</FormFeedback>
-                                    </InputGroup>
-                                    
-                                    <InputGroup className="mb-3">
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>@</InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input type="text" placeholder="Email" autoComplete="email" required/>
-                                        <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                                        <FormFeedback valid className="help-block">Input provided</FormFeedback>
-                                    </InputGroup>
-                                    
-                                    <InputGroup className="mb-3">
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                            <i className="icon-lock"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input type="password" placeholder="Password" autoComplete="new-password" required/>
-                                        <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                                        <FormFeedback valid className="help-block">Input provided</FormFeedback>
-                                    </InputGroup>
-                                    
-                                    <InputGroup className="mb-4">
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                            <i className="icon-lock"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <Input type="password" placeholder="Repeat password" autoComplete="new-password" required/>
-                                        <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                                        <FormFeedback valid className="help-block">Input provided</FormFeedback>
-                                    </InputGroup>
-                                    
-                                    <Button color="success" block>Create Account</Button>
-                                </Form>
-                                </CardBody>
+                                <UserRegister></UserRegister>
                                 
                                 <CardFooter className="p-4">
                                     <Row>
