@@ -5,7 +5,8 @@ const usersData = [
         lastname: "Da Silva",
         age: 26,
         role: "admin",
-        gender: "M"
+        gender: "M",
+        city: 1
     },
     {
         id: 2,
@@ -13,7 +14,8 @@ const usersData = [
         lastname: "Julia",
         age: 21,
         role: "customer",
-        gender: "F"
+        gender: "F",
+        city: 1
     },
     {
         id: 3,
@@ -21,7 +23,8 @@ const usersData = [
         lastname: "Rita",
         age: 31,
         role: "customer",
-        gender: "F"
+        gender: "F",
+        city: 3
     },
     {
         id: 4,
@@ -29,7 +32,8 @@ const usersData = [
         lastname: "Joaquina",
         age: 29,
         role: "salesman",
-        gender: "F"
+        gender: "F",
+        city: 6
     }
 ]
 

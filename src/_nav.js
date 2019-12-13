@@ -3,16 +3,17 @@ export default {
     {
       name: 'Usuarios',
       url: '/users',
-      icon: 'icon-user',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      icon: 'icon-user'
     },
     {
       name: 'Grupos',
       url: '/groups',
-      icon: 'icon-people',
+      icon: 'icon-people'
+    },
+    {
+      name: 'Cidades',
+      url: '/city',
+      icon: 'icon-location-pin',
       badge: {
         variant: 'info',
         text: 'NEW',

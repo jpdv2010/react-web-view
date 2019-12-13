@@ -20,7 +20,7 @@ class Groups extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xl={12}>
-            <DinamicTable data={groupList} ignoreColumns={['id']} customRender={this.customRender} title={"Groups"} smalTitle={"example"}/>
+            <DinamicTable data={groupList} ignoreColumns={['id']} customRender={this.customRender} title={"Grupos"} smalTitle={"groups"}/>
           </Col>
         </Row>
       </div>

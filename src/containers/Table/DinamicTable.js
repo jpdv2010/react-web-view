@@ -1,19 +1,29 @@
 import React, { Component, Suspense } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
-
-var data = {};
-var ignoreColumns = [];
-var customData = {};
-var customRender = {};
-
 class DinamicTable extends Component {
+    data = [];
+    ignoreColumns = [];
+    customData = {};
+    customRender = {};
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data : {}
+        }
+    }
 
     componentWillMount(){
-        data = this.props.data;
-        ignoreColumns = this.props.ignoreColumns;
-        customData = this.props.customData;
-        customRender = 
-        this.props.customRender;
+        this.setState({data : this.props.data})
+        this.ignoreColumns = this.props.ignoreColumns != undefined? this.props.ignoreColumns : [];
+        this.customData = this.props.customData;
+        this.customRender = this.props.customRender;
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.data != this.props.data){
+            this.setState({data: this.props.data});
+        }
     }
 
     render () {
@@ -21,10 +31,9 @@ class DinamicTable extends Component {
             return props.keys.map((key, index)=>{
                 if(rideItems.indexOf(index) == -1){
                     var row = null;
-                    if(customRender != null){
-                        row = customRender(props.data, key);
+                    if(this.customRender != null){
+                        row = this.customRender(props.data, key);
                     } else if(row === null) {
-
                         row = <td key={props.data[key]}>{props.data[key]}</td>
                     }
                     return row;
@@ -40,12 +49,12 @@ class DinamicTable extends Component {
                     <i className="fa fa-align-justify"></i> {this.props.title} <small className="text-muted">{this.props.smalTitle}</small>
                 </CardHeader>
                 <CardBody>
-                    <Table responsive hover data={this.data} >
+                    <Table responsive hover data={this.state.data} >
                         <thead>
                         <tr>
                             {
-                                Object.keys(customData != null? customData(data[0]) : data[0]).map((key, index) => {
-                                    if(ignoreColumns.indexOf(key) == -1){
+                                Object.keys(this.customData != null? this.customData(this.state.data[0]) : this.state.data[0]).map((key, index) => {
+                                    if(this.ignoreColumns != null && this.ignoreColumns.indexOf(key) == -1){
                                         return <th key={key}>{key}</th>
                                     } else {
                                         rideItems.push(index);
@@ -55,9 +64,9 @@ class DinamicTable extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {data.map((row, index) => 
+                        {this.state.data.map((row, index) => 
                                     <tr key={index}>
-                                        <RenderRow key={index} data={ customData != null? customData(row) : row } keys={Object.keys(data[0])}/>    
+                                        <RenderRow key={index} data={ this.customData != null? this.customData(row) : row } keys={Object.keys(this.state.data[0])}/>    
                                     </tr>
                         )}
                         </tbody>

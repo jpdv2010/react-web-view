@@ -38,7 +38,7 @@ class Users extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xl={12}>
-            <DinamicTable data={this.userList} ignoreColumns={['name','lastname','id']} customRender={this.customRender} customData={this.userModifier} title={"Users"} smalTitle={"example"}/>
+            <DinamicTable data={this.userList} ignoreColumns={['name', 'lastname', 'id', 'city']} customRender={this.customRender} customData={this.userModifier} title={"Usuarios"} smalTitle={"users"}/>
           </Col>
         </Row>
       </div>
