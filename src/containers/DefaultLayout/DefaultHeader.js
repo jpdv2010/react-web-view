@@ -32,6 +32,12 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <Link to="/users" className="nav-link">Users</Link>
           </NavItem>
+          <NavItem className="px-3">
+            <Link to="/groups" className="nav-link">Grupos</Link>
+          </NavItem>
+          <NavItem className="px-3">
+            <Link to="/city" className="nav-link">Cidades</Link>
+          </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
           <UncontrolledDropdown nav direction="down">
