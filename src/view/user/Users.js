@@ -12,7 +12,7 @@ class Users extends Component {
 
   constructor(props) {
     super(props);
-    this.userModifier = this.userModifier.bind(this);
+    this.dataModifier = this.dataModifier.bind(this);
     this.state = {
       modal : false,
       userList : []
@@ -32,7 +32,7 @@ class Users extends Component {
       })
   }
 
-  userModifier = (user) => {
+  dataModifier = (user) => {
     user.fullname = user.name + " " + user.lastname;
     user.teste = (user.gender == "F" || user.gender == "Female") && user.age >= 25 ? "Sim" : "Não";
     user.gender = user.gender == "F" || user.gender == "Female" ? "Female" : "Male";
@@ -58,7 +58,6 @@ class Users extends Component {
 
   afterConfirmAction(user = null) {
     if(user != null) {
-      console.log(user);
       axios.post(`http://localhost:8181/user`, user )
       .then(res => {
         const user = res.data;
@@ -80,7 +79,7 @@ class Users extends Component {
           
           <Col xl={12}>
             {this.state.userList != null && this.state.userList.length > 0?
-            <DinamicTable customHeader={this.customHeader()} data={this.state.userList} ignoreColumns={['name', 'lastname', 'id', 'city']} customRender={this.customRender} customData={this.userModifier} title={"Usuarios"} smalTitle={"users"} />
+            <DinamicTable customHeader={this.customHeader()} data={this.state.userList} ignoreColumns={['name', 'lastname', 'id', 'city']} customRender={this.customRender} customData={this.dataModifier} title={"Usuarios"} smalTitle={"users"} />
             : null}
           </Col>
         </Row>

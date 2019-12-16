@@ -47,7 +47,6 @@ class UserRegister extends Component {
 
     handleClick() {
         var user = {
-            id: this.getId(),
             name: this.state.name,
             lastname: this.state.lastname,
             age: this.state.age,
@@ -58,17 +57,6 @@ class UserRegister extends Component {
         if(this.props.afterConfirmAction != null) {
             this.props.afterConfirmAction(user);
         }
-    }
-
-    getId(){
-        var maxId = 0;
-        for(var i = 0; i < usersData.length; i++) {
-            if(usersData[i].id > maxId) {
-                maxId = usersData[i].id;
-            } 
-        }
-
-        return maxId + 1;
     }
     
     render(){
