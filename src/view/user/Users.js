@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Col, Row,Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Alert, Button, Col, Row,Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import axios from 'axios';
 
 import usersData from './UsersData';
 import UserRegister from './UserRegister';
@@ -9,20 +10,26 @@ import DinamicTable from '../../containers/Table/DinamicTable';
 
 class Users extends Component {
 
-  userList = [];
-
   constructor(props) {
     super(props);
     this.userModifier = this.userModifier.bind(this);
     this.state = {
-      modal : false
+      modal : false,
+      userList : []
     }
 
     this.afterConfirmAction = this.afterConfirmAction.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  componentWillMount() {
-    this.userList = usersData.filter((user) => user.id < 10);
+  componentDidMount() {
+    axios.get(`http://localhost:8181/user`)
+      .then(res => {
+        const userList = res.data;
+        this.setState({ userList });
+      }).catch( function( error ) {
+        console.log(error);
+      })
   }
 
   userModifier = (user) => {
@@ -49,9 +56,19 @@ class Users extends Component {
     this.setState({modal : !this.state.modal});
   }
 
-  afterConfirmAction(object = null) {
-    if(object != null) {
-      this.userList.push(object);
+  afterConfirmAction(user = null) {
+    if(user != null) {
+      console.log(user);
+      axios.post(`http://localhost:8181/user`, user )
+      .then(res => {
+        const user = res.data;
+        var userList = this.state.userList;
+        userList.push(res.data);
+        this.setState(userList);
+        this.state.userList.push(user);
+      }).catch( function( error ) {
+        console.log(error);
+      })
     }
     this.setState({modal : false});
   }
@@ -62,7 +79,9 @@ class Users extends Component {
         <Row>
           
           <Col xl={12}>
-            <DinamicTable customHeader={this.customHeader()} data={this.userList} ignoreColumns={['name', 'lastname', 'id', 'city']} customRender={this.customRender} customData={this.userModifier} title={"Usuarios"} smalTitle={"users"} />
+            {this.state.userList != null && this.state.userList.length > 0?
+            <DinamicTable customHeader={this.customHeader()} data={this.state.userList} ignoreColumns={['name', 'lastname', 'id', 'city']} customRender={this.customRender} customData={this.userModifier} title={"Usuarios"} smalTitle={"users"} />
+            : null}
           </Col>
         </Row>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-md ' + this.props.className}>
@@ -70,8 +89,6 @@ class Users extends Component {
           <ModalBody>
             <UserRegister afterConfirmAction={this.afterConfirmAction}></UserRegister>
           </ModalBody>
-          <ModalFooter>
-          </ModalFooter>
         </Modal>
       </div>
     )

@@ -3,6 +3,7 @@ import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputG
 import { FormGroup, CardHeader,FormFeedback, Label} from 'reactstrap';
 import userData from './UsersData';
 import usersData from './UsersData';
+import cityData from '../city/CitiesData';
 
 class UserRegister extends Component {
 
@@ -12,9 +13,9 @@ class UserRegister extends Component {
             name: '',
             lastname: '',
             age: null,
-            role: '',
-            gender: '',
-            city: ''
+            role: 'ADMIN',
+            gender: 'M',
+            city: 1
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -50,7 +51,7 @@ class UserRegister extends Component {
             name: this.state.name,
             lastname: this.state.lastname,
             age: this.state.age,
-            role: this.state.age,
+            role: this.state.role,
             gender: this.state.gender,
             city: this.state.city
         }
@@ -82,8 +83,8 @@ class UserRegister extends Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'name')} type="text" className="form-control-warning" id="inputWarning2i" placeholder="Name" autoComplete="name" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
                         </InputGroup>
                         
                         <InputGroup className="mb-3">
@@ -93,19 +94,34 @@ class UserRegister extends Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'lastname')} type="text" className="form-control-warning" id="inputWarning2i" placeholder="Lastname" autoComplete="lastname" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
                         </InputGroup>
 
                         <InputGroup className="mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
-                                <i className="icon-user"></i>
+                                <i className="icon-calendar"></i>
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'age')} type="number" className="form-control-warning" id="inputWarning2i" placeholder="Age" autoComplete="age" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
+                        </InputGroup>
+
+                        <InputGroup className="mb-3">
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                <i className="icon-briefcase"></i>
+                                </InputGroupText>
+                            </InputGroupAddon>
+                            <Input type="select" name="ccmonth" id="ccmonth" onChange={(event) => this.handleChange(event, 'role')} placeholder="Gender" required>
+                                <option value="ADMIN">admin</option>
+                                <option value="SALESMAN">salesman</option>
+                                <option value="CUSTOMER">customer</option>
+                            </Input>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
                         </InputGroup>
 
                         <InputGroup className="mb-3">
@@ -114,34 +130,32 @@ class UserRegister extends Component {
                                 <i className="icon-user"></i>
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'role')} type="text" className="form-control-warning" id="inputWarning2i" placeholder="Role" autoComplete="Role" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
+                            <Input type="select" name="ccmonth" id="ccmonth" onChange={(event) => this.handleChange(event, 'gender')} placeholder="Gender" required>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </Input>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
                         </InputGroup>
 
                         <InputGroup className="mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
-                                <i className="icon-user"></i>
+                                <i className="icon-location-pin"></i>
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'gender')} type="text" className="form-control-warning" id="inputWarning2i" placeholder="Gender" autoComplete="gender" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
-                        </InputGroup>
-
-                        <InputGroup className="mb-3">
-                            <InputGroupAddon addonType="prepend">
-                                <InputGroupText>
-                                <i className="icon-user"></i>
-                                </InputGroupText>
-                            </InputGroupAddon>
-                            <Input value={this.state.value} onChange={(event) => this.handleChange(event, 'city')} type="text" className="form-control-warning" id="inputWarning2i" placeholder="City" autoComplete="city" required/>
-                            <FormFeedback className="help-block">Please provide a valid information</FormFeedback>
-                            <FormFeedback valid className="help-block">Input provided</FormFeedback>
+                            <Input type="select" name="ccmonth" id="ccmonth" onChange={(event) => this.handleChange(event, 'city')} placeholder="City" required>
+                                {
+                                    cityData.map((row, index) => 
+                                        <option value={row.id}>{row.name}</option>
+                                    )
+                                }
+                            </Input>
+                            <FormFeedback className="help-block">Insira um valor válido</FormFeedback>
+                            <FormFeedback valid className="help-block">Válido!</FormFeedback>
                         </InputGroup>
                         
-                        <Button onClick={this.handleClick} color="success" block>Create Account</Button>
+                        <Button onClick={this.handleClick} color="success" block>Criar Usuário</Button>
                     </Form>
                 </CardBody>
             </div>

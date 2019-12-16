@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import axios from 'axios';
 
 import usersData from './UsersData'
 
 class User extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    }
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:8181/user/` + this.props.match.params.id)
+      .then(res => {
+        const user = res.data;
+        this.setState({ user });
+      }).catch( function( error ) {
+        console.log(error);
+      })
+  }
+
   render() {
 
-    const user = usersData.find(user => user.id.toString() === this.props.match.params.id)
-
-    const userDetails = user ? Object.entries(user) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
+    const userDetails = this.state.user ? Object.entries(this.state.user) : [['id', (<span><i className="text-muted icon-ban"></i> Not found</span>)]]
 
     return (
       <div className="animated fadeIn">
