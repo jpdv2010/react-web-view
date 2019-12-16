@@ -19,7 +19,7 @@ class Users extends Component {
     }
 
     this.afterConfirmAction = this.afterConfirmAction.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -47,12 +47,12 @@ class Users extends Component {
   }
 
   customHeader = () => {
-    return (<Button active color="success" aria-pressed="true" onClick={() => {this.toggle()}}>
+    return (<Button active color="success" aria-pressed="true" onClick={() => {this.toggleModal()}}>
         <i className="icon-user-follow"></i>&nbsp;Adicionar Usuário
     </Button>)
   }
 
-  toggle() {
+  toggleModal() {
     this.setState({modal : !this.state.modal});
   }
 
@@ -84,8 +84,8 @@ class Users extends Component {
             : null}
           </Col>
         </Row>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-md ' + this.props.className}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={'modal-md ' + this.props.className}>
+          <ModalHeader toggle={this.toggleModal}>Register</ModalHeader>
           <ModalBody>
             <UserRegister afterConfirmAction={this.afterConfirmAction}></UserRegister>
           </ModalBody>
