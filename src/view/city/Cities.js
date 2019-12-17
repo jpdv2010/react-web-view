@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { Button, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
@@ -19,6 +20,8 @@ class Cities extends Component {
       showingUsers: [],
       cityName: ""
     }
+
+    this.toggleCity = this.toggleCity.bind(this);
   }
 
   componentWillMount() {
@@ -33,14 +36,19 @@ class Cities extends Component {
 
   customRender = (data, key) => {
     if (key === 'verUsuarios') {
-      return <td key={data[key]}><Button block color="link" onClick={() => { this.toggle(data['id'], data['name']) }}>{data[key]}</Button></td>
+      return <td key={data[key]}><Button block color="link" onClick={() => { this.toggleCity(data['id'], data['name']) }}>{data[key]}</Button></td>
     }
     return <td key={data[key]}>{data[key]}</td>
   }
 
-  toggle(id, name) {
-    this.setState({ showingUsers: this.state.users.filter(user => user.city == id) })
-    this.setState({ cityName: name })
+  toggleCity(id, name) {
+    this.handleSubmit(id);
+    this.setState({ cityName: name });
+  }
+
+  async handleSubmit(id) {
+    const response = await axios.get('http://localhost:8181/user/city/' + id);
+    this.setState({ showingUsers: response.data });
   }
 
   render() {

@@ -19,7 +19,7 @@ class Users extends Component {
     }
 
     this.afterConfirmAction = this.afterConfirmAction.bind(this);
-    this.toggle = this.toggleModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
